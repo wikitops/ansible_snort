@@ -1,0 +1,22 @@
+---
+
+###
+# SNORT
+###
+
+# Version
+snort_daq_version: 2.0.6
+snort_version: 2.9.12
+
+# Sources
+snort_daq_source: https://www.snort.org/downloads/snort/daq-{{ snort_daq_version }}.tar.gz
+snort_source: https://www.snort.org/downloads/snort/snort-{{ snort_version }}.tar.gz
+
+# RPM
+snort_rpm_url:
+  - https://www.snort.org/downloads/snort/daq-2.0.6-1.centos7.x86_64.rpm
+  - https://www.snort.org/downloads/snort/snort-2.9.12-1.centos7.x86_64.rpm
+
+# User
+snort_user: snort
+snort_group: snort

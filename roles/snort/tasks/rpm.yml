@@ -1,0 +1,30 @@
+---
+
+- name: SNORT RPM | Install prerequisites packages
+  package:
+    name:
+      - libnghttp2
+      - libdnet-devel
+      - libdnet
+      - gcc
+      - flex
+      - bison
+      - zlib
+      - zlib-devel
+      - libpcap
+      - libpcap-devel
+      - tcpdump
+    state: present
+
+- name: SNORT RPM | Manage symlink
+  file:
+    state: link
+    src: /usr/lib64/libdnet.so.1.0.1
+    dest: /usr/lib64/libdnet.1
+    owner: root
+    group: root
+
+- name: SNORT RPM | Installation
+  yum:
+    name: "{{ snort_rpm_url }}"
+    state: present

@@ -1,0 +1,20 @@
+---
+
+- name: SNORT | Install from source
+  import_tasks: source.yml
+  when: ansible_os_family == 'Debian'
+
+- name: SNORT | Install from rpm
+  import_tasks: rpm.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: SNORT | Configure
+  import_tasks: configure.yml
+
+- name: SNORT | Install community rules
+  unarchive:
+    src: https://snort.org/downloads/community/community-rules.tar.gz
+    dest: /etc/snort/rules
+    owner: root
+    group: root
+    remote_src: yes

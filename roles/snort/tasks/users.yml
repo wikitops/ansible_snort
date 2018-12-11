@@ -1,0 +1,15 @@
+---
+
+- name: SNORT USER | Manage group
+  group:
+    name: "{{ snort_group }}"
+    state: present
+    system: true
+
+- name: SNORT USER | Manage user
+  user:
+    name: "{{ snort_user }}"
+    comment: "snort admin user"
+    group: "{{ snort_group }}"
+    state: present
+    system: true

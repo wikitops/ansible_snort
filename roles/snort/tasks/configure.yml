@@ -1,0 +1,33 @@
+---
+
+- name: SNORT CONFIGURE | Manage directories
+  file:
+    state: directory
+    path: "{{ item.path }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: 0755
+  with_items:
+    - { path: /etc/snort/rules, owner: root, group: root }
+    - { path: /var/log/snort, owner: "{{ snort_user }}", group: "{{ snort_group }}" }
+    - { path: /usr/local/lib/snort_dynamicrules, owner: root, group: root }
+
+- name: SNORT CONFIGURE | Manage files
+  file:
+    state: touch
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - /etc/snort/rules/white_list.rules
+    - /etc/snort/rules/black_list.rules
+    - /etc/snort/rules/local.rules
+
+- name: SNORT CONFIGURE | Configuration
+  template:
+    src: etc/snort/snort.conf.j2
+    dest: /etc/snort/snort.conf
+    owner: "{{ snort_user }}"
+    group: root
+    mode: 0644
